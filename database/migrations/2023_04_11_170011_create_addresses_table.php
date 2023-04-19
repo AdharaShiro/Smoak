@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('houseNumber');
             $table->string('city');
             $table->string('street');
-            $table->string('block');
-            $table->integer('N°');
+            $table->string('subdivision');
             $table->integer('postCode');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

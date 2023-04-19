@@ -13,19 +13,31 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('subCategory_id'); //Relacion en la llave foranea (Tiene que ser igual dentro de las primeras comillas)
-            $table->foreign('subCategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
-            $table->timestamps();
-
-            $table->string('Name');
-            $table->string('Model');
-            $table->string('band');
+            $table->string('name');
+            $table->string('model');
+            $table->string('brand');
             $table->string('color');
             $table->string('photo');
-            $table->string('precio');
 
+            //Nullable es un método para indicar que si el campo no se agrega no existirá un error por falta del mismo
+            //esto es por el caso de que se vendan productos de tecnología que no cuenten con almacenamiento o dicha 
+            //característica
+            $table->string('storage') -> nullable();
+            $table->string('RAM') -> nullable();
+            $table->string('batteryCapacity') -> nullable();
+            $table->string('CPU') -> nullable();
 
-            //Nota: En esta parte -> sub_categories -> Este es el nombre de la tabla en la base de datos) 
+            //el componente float se basa en 3 parametros, el nombre del campo, la cantidad de enteros que quieres y la cantidad de decimales que quieres
+            //en este caso es precio, con 6 enteros y 2 decimales (999,999.99)
+            $table->float('price', 6, 2);
+            $table->integer('stockQuantity');
+            
+            //Nota: En esta parte -> on(sub_categories) -> sub_categories -> es el nombre de la tabla en la base de datos) 
+            $table->unsignedBigInteger('subCategory_id'); //Relacion en la llave foranea (Tiene que ser igual dentro de las primeras comillas)
+            $table->foreign('subCategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
+            
+            $table->timestamps();
+            
         });
     }
 
