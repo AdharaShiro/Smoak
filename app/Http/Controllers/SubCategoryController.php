@@ -12,15 +12,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $subCategory = subCategory::all();
+        return $subCategory;
     }
 
     /**
@@ -28,23 +21,24 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'Category_id' => 'required',
+            'description' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(subCategory $subCategory)
-    {
-        //
-    }
+        //la estructura para almacenar un campo en una tabla de la base de datos es
+        //la variable que usaremos como objeto, siempre comienza con $
+        //después se usa el objeto con una -> indicando el nombre de cada campo que tenga la BD
+        //se le tiene que asignar el $request que viene siendo lo que recibe el método y con
+        //el nombre de la variable que se le otorga en cada campo desde el axios (o desde postman en su defecto)
+        $subCategory = new subCategory();
+        $subCategory -> Category_id = $request -> Category_id;
+        $subCategory -> description = $request -> description;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(subCategory $subCategory)
-    {
-        //
+        //el método save nos ayuda a que se guarde todo lo que se encuentra en el arreglo de $products en la BD
+        $subCategory -> save();
+
+        return $subCategory;
     }
 
     /**
@@ -52,14 +46,19 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, subCategory $subCategory)
     {
-        //
+        $subCategory = subCategory::find($request->id);
+        $subCategory -> Category_id = $request -> Category_id;
+        $subCategory -> description = $request -> description;
+
+        $subCategory -> save();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(subCategory $subCategory)
+    public function destroy(Request $request, subCategory $subCategory)
     {
-        //
+        $subCategory = subCategory::destroy($request->id);
+        echo 'The subcategory has been deleted successfully.';
     }
 }

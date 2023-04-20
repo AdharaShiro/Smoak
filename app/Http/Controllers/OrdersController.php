@@ -12,7 +12,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        $orders = orders::all();
+        return $orders;
     }
 
     /**
@@ -28,7 +29,21 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'product_id' => 'required',
+            'quantity' => 'required',
+            'finalPrice' => 'required',
+        ]);
+        
+        $orders = new orders();
+        $orders -> user_id = $request -> user_id;
+        $orders -> product_id = $request -> product_id;
+        $orders -> quantity = $request -> quantity;
+        $orders -> finalPrice = $request -> finalPrice;
+        $orders -> save();
+
+        return $orders;
     }
 
     /**
@@ -52,14 +67,22 @@ class OrdersController extends Controller
      */
     public function update(Request $request, orders $orders)
     {
-        //
+        $orders = orders::find($request -> id);
+        $orders -> user_id = $request -> user_id;
+        $orders -> product_id = $request -> product_id;
+        $orders -> quantity = $request -> quantity;
+        $orders -> finalPrice = $request -> finalPrice;
+        $orders -> save();
+
+        return $orders;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(orders $orders)
+    public function destroy(Request $request, orders $orders)
     {
-        //
+        $orders = orders::destroy($request->id);
+        echo 'The order has been deleted successfully';
     }
 }

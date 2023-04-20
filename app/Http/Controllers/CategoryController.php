@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = category::all();
+        return $category;
     }
 
     /**
@@ -28,7 +29,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required',
+        ]);
+
+        
     }
 
     /**

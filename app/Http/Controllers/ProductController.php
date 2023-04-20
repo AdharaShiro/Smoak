@@ -12,15 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $products = product::all();
+        return $products;
     }
 
     /**
@@ -28,23 +21,36 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'name' => 'required',
+            'model' => 'required',
+            'brand' => 'required',
+            'color' => 'required',
+            'photo' => 'required',
+            'price' => 'required',
+            'stockQuantity' => 'required',
+            'subCategory' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(product $product)
-    {
-        //
-    }
+        //la estructura para almacenar un campo en una tabla de la base de datos es
+        //la variable que usaremos como objeto, siempre comienza con $
+        //después se usa el objeto con una -> indicando el nombre de cada campo que tenga la BD
+        //se le tiene que asignar el $request que viene siendo lo que recibe el método y con
+        //el nombre de la variable que se le otorga en cada campo desde el axios (o desde postman en su defecto)
+        $product = new product();
+        $product -> name = $request -> name;
+        $product -> model = $request -> model;
+        $product -> brand = $request -> brand;
+        $product -> color = $request -> color;
+        $product -> foto = $request -> foto;
+        $product -> price = $request -> price;
+        $product -> stockQuantity = $request -> stockQuantity;
+        $product -> subCategory_id = $request -> subCategory;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(product $product)
-    {
-        //
+        //el método save nos ayuda a que se guarde todo lo que se encuentra en el arreglo de $products en la BD
+        $product -> save();
+
+        return $product;
     }
 
     /**
@@ -52,14 +58,30 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
-        //
+        //la estructura del update es la misma que la de store, solamente que aquí ya tenemos toda la info del producto
+        //con product::find($request->id); (y find sirve solamente para id, si buscas por otros campos será con where)
+        //podrás traer toda la info del producto que buscas por su id y sobreescribir los datos del arreglo y esto se guarda.
+        //Al tener un id específico y no estar vacio solamente actualizará la información, más no creará otro.
+        $product = product::find($request->id);
+        $product -> name = $request -> name;
+        $product -> model = $request -> model;
+        $product -> brand = $request -> brand;
+        $product -> color = $request -> color;
+        $product -> foto = $request -> foto;
+        $product -> price = $request -> price;
+        $product -> stockQuantity = $request -> stockQuantity;
+        $product -> subCategory_id = $request -> subCategory;
+
+        //el método save nos ayuda a que se guarde todo lo que se encuentra en el arreglo de $products en la BD
+        $product -> save();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(product $product)
+    public function destroy(Request $request, product $product)
     {
-        //
+        $products = product::destroy($request->id);
+        echo 'The product has been deleted successfully.';
     }
 }
