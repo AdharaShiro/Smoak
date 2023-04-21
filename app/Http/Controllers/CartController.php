@@ -10,25 +10,34 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($user)
     {
-        //
+        //Aquí en el momento de mandar a buscar un carrito se debe de filtrar por el usuario que tiene el carrito activo en la tabla de carritos.
+        //Ya que al ponerle All() como a otros métodos te traería todo lo de todos los usuarios y no lo de los activos.
+        $cart = cart::where('usuario', $user)->get();
+        return $cart;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
+     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'product_id' => 'required',
+            'quantity' => 'required',
+            'finalPrice' => 'required',
+        ]);
+        
+        $cart = new cart();
+        $cart -> user_id = $request -> user_id;
+        $cart -> product_id = $request -> product_id;
+        $cart -> quantity = $request -> quantity;
+        $cart -> finalPrice = $request -> finalPrice;
+        $cart -> save();
+
+        return $cart;
     }
 
     /**
@@ -52,14 +61,21 @@ class CartController extends Controller
      */
     public function update(Request $request, cart $cart)
     {
-        //
+        $cart = cart::find($request -> id);
+        $cart -> user_id = $request -> user_id;
+        $cart -> product_id = $request -> product_id;
+        $cart -> quantity = $request -> quantity;
+        $cart -> save();
+
+        return $cart;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(cart $cart)
+    public function destroy(Request $request, cart $cart)
     {
-        //
+        $cart = cart::destroy($request->id);
+        echo 'The cart has been deleted successfully';
     }
 }

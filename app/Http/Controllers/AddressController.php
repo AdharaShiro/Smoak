@@ -10,9 +10,10 @@ class AddressController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($user)
     {
-        //
+        $address = Address::where('usuario', $user)->get();
+        return $address;
     }
 
     /**
@@ -28,7 +29,25 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'houseNumber' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            'subdivision' => 'required',
+            'postCode' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        $address = new Address();
+        $address -> houseNumber = $request -> houseNumber;
+        $address -> city = $request -> city;
+        $address -> street = $request -> street;
+        $address -> subdivision = $request -> subdivision;
+        $address -> postCode = $request -> postCode;
+        $address -> user_id = $request -> user_id;
+        $address -> save();
+
+        return $address;
     }
 
     /**
@@ -52,14 +71,24 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $address -> cart::find($request -> id);
+        $address -> houseNumber = $request -> houseNumber;
+        $address -> city = $request -> city;
+        $address -> street = $request -> street;
+        $address -> subdivision = $request -> subdivision;
+        $address -> postCode = $request -> postCode;
+        $address -> user_id = $request -> user_id;
+        $address -> save();
+
+        return $address;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Address $address)
+    public function destroy(Request $request, Address $address)
     {
-        //
+        $address = Address::destroy($request -> id);
+        echo 'The address has been deleted successfully';
     }
 }

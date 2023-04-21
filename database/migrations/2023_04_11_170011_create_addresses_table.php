@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->integer('houseNumber');
             $table->string('city');
             $table->string('street');
@@ -21,6 +20,7 @@ return new class extends Migration
             $table->integer('postCode');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
