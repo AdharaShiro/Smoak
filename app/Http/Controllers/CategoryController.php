@@ -33,7 +33,11 @@ class CategoryController extends Controller
             'description' => 'required',
         ]);
 
-        
+        $category = new category();
+        $category -> description = $request -> description;
+        $category -> save();
+
+        return $category;
     }
 
     /**
@@ -57,14 +61,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, category $category)
     {
-        //
+        $category = category::find($request -> id);
+        $category -> description = $request -> description;
+        $category -> save();
+
+        return $category;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy(Request $request, category $category)
     {
-        //
+        $category = category::destroy($request -> id);
+        echo 'The category has been deleted successfully';
     }
 }
