@@ -1,15 +1,5 @@
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import { Form, InputGroup, Button } from 'react-bootstrap';
+import { TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import React, { useState, useContext } from 'react';
@@ -17,18 +7,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
@@ -37,32 +15,42 @@ export default function SignIn() {
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
 
+    const { setUserLogged, setUser } = useContext(AuthContext);
     const [textError, setTextError] = useState('');
     const [formOk, setFormOk] = useState(true);
 
     const login = async (e) => {
         e.preventDefault();
         console.log("Login")
+
         const headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
         await axios.post("http://localhost/Smoak/public/api/login",
-            { email: email, password: password, 
-                
+            {
+                email: email, password: password,
+
             }, headers)
             .then(response => {
                 localStorage.setItem("token", response.data.token);
+                setUserLogged(true);
+                localStorage.setItem("user", JSON.stringify(response.data.user));
+                setUser(response.data.user);
+                localStorage.setItem("user_id", response.data.user.id);
+
+                navigate('/smoak/public/')
+
+                //$user = localStorage.getItem("user_id");
+
+
                 //console.log("token: ", response.data.token);
-                
+
 
 
                 // Rutas de inicio de sesión. 
 
-                setUserLogged(true);
-                localStorage.setItem("user", JSON.stringify(response.data.user));
-                setUser(response.data.user);
-                
+
                 /*if (response.data.user.rol === "Administrador") {
                     console.log("Sesión iniciada", email, password); //Muestra lo que recibe 
                     console.log("Administrador: ", response.data.user.nombre, " ", response.data.user.apellido);
@@ -81,9 +69,36 @@ export default function SignIn() {
     }
 
 
-  return (
-    <>
-        <ThemeProvider theme={theme}>
+    return (
+        <>
+            <Form>
+                <InputGroup className="mb-3">
+                    <TextField
+                        label="Email"
+                        variant="outlined"
+                        fullWidth
+                    />
+                </InputGroup>
+
+                <InputGroup className="mb-3">
+                    <TextField
+                        label="Password"
+                        variant="outlined"
+                        type="password"
+                        fullWidth
+                    />
+                </InputGroup>
+
+                <Button variant="primary" type="submit">
+                    Login
+                </Button>
+            </Form>
+        </>
+    );
+}
+
+/*
+<ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -150,6 +165,4 @@ export default function SignIn() {
             <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
         </ThemeProvider>
-    </>
-  );
-}
+*/

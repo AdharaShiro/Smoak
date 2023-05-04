@@ -16,11 +16,11 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@emotion/react": "^11.10.6",
-        "@emotion/styled": "^11.10.6",
+        "@emotion/react": "^11.10.8",
+        "@emotion/styled": "^11.10.8",
         "@fontsource/roboto": "^4.5.8",
         "@mui/icons-material": "^5.11.16",
-        "@mui/material": "^5.12.0",
+        "@mui/material": "^5.12.3",
         "@mui/styled-engine-sc": "^5.12.0",
         "react-bootstrap": "^2.7.2",
         "react-router-dom": "^6.10.0",
