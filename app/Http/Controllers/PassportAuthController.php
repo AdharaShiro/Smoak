@@ -12,6 +12,7 @@ class PassportAuthController extends ResponseController
     public function register(Request $request){
         $validator = Validator::make($request->all(),[
             'name' => 'required',
+            //'lastName' => 'required',
             'email' => 'required|email',
             'password' => 'required',
             'c_password' => 'required|same:password',
