@@ -1,6 +1,6 @@
-import { Nav, Navbar, NavDropdown, Row, Col, Container } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown, Row, Col, Container } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
-import IconButton from '@mui/material';
+import {IconButton} from '@mui/material';
 
 function BasicExample() {
     return (
@@ -23,9 +23,7 @@ function BasicExample() {
                             <Nav align="end">
                                 <Nav.Link as={Link} to='/smoak/public/carrito'>
                                     <IconButton aria-label="cart">
-                                        <StyledBadge badgeContent={4} color="secondary">
                                             <i class="material-icons">shopping_cart</i>
-                                        </StyledBadge>
                                     </IconButton>
                                 </Nav.Link>
                             </Nav>

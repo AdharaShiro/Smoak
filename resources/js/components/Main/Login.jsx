@@ -38,7 +38,7 @@ export default function SignIn() {
                 localStorage.setItem("user", JSON.stringify(response.data.user));
                 setUser(response.data.user);
                 localStorage.setItem("user_id", response.data.user.id);
-
+                alert("Welcome back, " + response.data.name);
                 navigate('/smoak/public/')
 
                 //$user = localStorage.getItem("user_id");
@@ -71,12 +71,14 @@ export default function SignIn() {
 
     return (
         <>
-            <Form>
+            <Form onSubmit={login}>
                 <InputGroup className="mb-3">
                     <TextField
                         label="Email"
                         variant="outlined"
                         fullWidth
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </InputGroup>
 
@@ -86,6 +88,8 @@ export default function SignIn() {
                         variant="outlined"
                         type="password"
                         fullWidth
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </InputGroup>
 
