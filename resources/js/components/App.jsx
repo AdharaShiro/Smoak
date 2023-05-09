@@ -14,7 +14,7 @@ export default function App(){
             <BrowserRouter>
                     <Routes>
                         <Route path="/smoak/public" element={<NavBar />} >
-                            <Route index element={<Login/>} />
+                            <Route index element={<Index/>} />
                             <Route path="login" element={<Login />} /> 
                             <Route path="register" element={<Register/> }/>
                         </Route>

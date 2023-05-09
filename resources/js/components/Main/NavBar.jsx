@@ -23,7 +23,7 @@ function BasicExample() {
                             <Nav align="end">
                                 <Nav.Link as={Link} to='/smoak/public/carrito'>
                                     <IconButton aria-label="cart">
-                                            <i class="material-icons">shopping_cart</i>
+                                            <i className="material-icons">shopping_cart</i>
                                     </IconButton>
                                 </Nav.Link>
                             </Nav>

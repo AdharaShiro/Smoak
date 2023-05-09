@@ -2,7 +2,13 @@ import { Col, Row, Button, Tab, Tabs, Carousel, Stack, Card } from 'react-bootst
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { CheckBox, FavoriteBorder, Favorite } from '@mui/icons-material';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Main() {
   /*const getAllProducto = async (id = 1) => {
@@ -20,77 +26,102 @@ function Main() {
     getAllProducto()
 
   }, [])*/
+
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+
   return (
-    <div class="container">
-      <div id="carouselExampleFade" class="carousel slide carousel-fade">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://i.imgur.com/6vb9TyB.png" class="d-block w-100" alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img src="https://i.imgur.com/afgbr18.png" class="d-block w-100" alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img src="https://i.imgur.com/Upc938Y.png" class="d-block w-100" alt="..." />
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-          <div class="card h-100">
-            <img src="..." class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <div className="container">
+      <div className="row">
+        <div id="carouselExampleFade" className="carousel slide carousel-fade">
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src="https://i.imgur.com/6vb9TyB.png" className="d-block w-100" alt="..." />
             </div>
-            <div class="card-footer">
-
-              <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-              <Checkbox
-                {...label}
-                icon={<BookmarkBorderIcon />}
-                checkedIcon={<BookmarkIcon />}
-              />
-
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/afgbr18.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/Upc938Y.png" className="d-block w-100" alt="..." />
             </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <img src="..." class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-body-secondary">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <img src="..." class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-body-secondary">Last updated 3 mins ago</small>
-            </div>
-          </div>
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+          </button>
         </div>
       </div>
+      <div className="row py-5">
+
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          <div className="col">
+            <div className="card h-100">
+              <img src="..." className="card-img-top" alt="..." />
+              <div className="card-body">
+                <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+              <div className="card-footer" style={{ textAlign: 'right' }}>
+                <div className="row">
+                  <div className="col">
+                    <Checkbox {...label} title='Cart' icon={<AddShoppingCartIcon />} checkedIcon={<ShoppingCartIcon />} />
+                  </div>
+                  <div className="col">
+                    <Checkbox {...label} title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                    <Checkbox {...label} title='Save for later' icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />}
+                    />
+                  </div>
+                </div>
+
+                <Checkbox {...label} title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                <Checkbox
+                  {...label}
+                  title='Save for later'
+                  icon={<BookmarkBorderIcon />}
+                  checkedIcon={<BookmarkIcon />}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card h-100">
+              <img src="..." className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Card title</h5>
+                <p className="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              <div className="card-footer">
+                <small className="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card h-100">
+              <img src="..." className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Card title</h5>
+                <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              </div>
+              <div className="card-footer">
+                <small className="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
   );
 }
 
 export default Main;
+
+
+/*
+
+*/

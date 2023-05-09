@@ -38,7 +38,7 @@ export default function SignIn() {
                 localStorage.setItem("user", JSON.stringify(response.data.user));
                 setUser(response.data.user);
                 localStorage.setItem("user_id", response.data.user.id);
-                alert("Welcome back, " + response.data.name);
+                alert("Welcome back, " + response.data.user.name + " " + response.data.user.lastName);
                 navigate('/smoak/public/')
 
                 //$user = localStorage.getItem("user_id");

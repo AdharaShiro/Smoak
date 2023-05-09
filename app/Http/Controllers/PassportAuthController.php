@@ -12,7 +12,7 @@ class PassportAuthController extends ResponseController
     public function register(Request $request){
         $validator = Validator::make($request->all(),[
             'name' => 'required',
-            //'lastName' => 'required',
+            'lastName' => 'required',
             'email' => 'required|email',
             'password' => 'required',
             'c_password' => 'required|same:password',
@@ -25,20 +25,19 @@ class PassportAuthController extends ResponseController
         $input = $request -> all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] = $user->createToken('MyApp')->accessToken;
-        $success['name'] = $user->name;
-
-        return $this->sendResponse($success, 'User Register Succesfully.');
+        $token = $user->createToken('MyApp')->accessToken;
+            
+        return response()->json(['token' => $token, 'user' => $user], 200);
     }
 
     public function login (Request $request){
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
-            $success['token'] = $user->createToken('MyApp')->accessToken;
-            $success['name'] = $user->name;
-            return $this->sendResponse($success, 'User login successfully.');
+            $token = $user->createToken('MyApp')->accessToken;
+            
+            return response()->json(['token' => $token, 'user' => $user], 200);
         }else{
-            return $this->sendError('Unauthorized.', ['error'=>'Unauthorized']);
+            return response()->json(['error'=>'Unauthorized'], 401);
         }
     }
 }
