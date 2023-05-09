@@ -54,5 +54,11 @@ class User extends Authenticatable
     public function Addresses(){
         return $this -> hasMany(Address::class);
     }
-    
+
+    public function UserFavorites(){
+        return $this -> hasMany(UserFavorite::class);
+    }
+    public function UserList(){
+        return $this -> hasMany(UserList::class);
+    }
 }

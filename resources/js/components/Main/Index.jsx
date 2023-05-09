@@ -66,23 +66,14 @@ function Main() {
               </div>
               <div className="card-footer" style={{ textAlign: 'right' }}>
                 <div className="row">
-                  <div className="col">
+                  <div className="col" style={{textAlign: 'left'}}>
                     <Checkbox {...label} title='Cart' icon={<AddShoppingCartIcon />} checkedIcon={<ShoppingCartIcon />} />
                   </div>
-                  <div className="col">
+                  <div className="col px-3">
                     <Checkbox {...label} title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                    <Checkbox {...label} title='Save for later' icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />}
-                    />
+                    <Checkbox {...label} title='Add to listing' icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />}/>
                   </div>
                 </div>
-
-                <Checkbox {...label} title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                <Checkbox
-                  {...label}
-                  title='Save for later'
-                  icon={<BookmarkBorderIcon />}
-                  checkedIcon={<BookmarkIcon />}
-                />
               </div>
             </div>
           </div>
