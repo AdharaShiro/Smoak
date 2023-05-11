@@ -7,59 +7,23 @@ use Illuminate\Http\Request;
 
 class UserFavoriteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index($user_id){
+        $UserFavorite = UserFavorite::where('user_id', $user_id)->orderBy('created_at', 'asc')->get();
+        return $UserFavorite;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function addFavorite(Request $request){
+        $addFavorite = new UserFavorite();
+        $addFavorite -> user_id = $request -> user_id;
+        $addFavorite -> product_id = $request -> product_id;
+        $addFavorite -> save();
+
+        return $addFavorite;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function deleteFavorite(Request $request){
+        $deleteFavorite = UserFavorite::destroy($request -> id);
+        return $deleteFavorite;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(UserFavorite $userFavorite)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(UserFavorite $userFavorite)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, UserFavorite $userFavorite)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(UserFavorite $userFavorite)
-    {
-        //
-    }
 }

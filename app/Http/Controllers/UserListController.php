@@ -10,56 +10,53 @@ class UserListController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($user_id)
     {
-        //
+        $UserList = UserList::where('user_id', $user_id)->orderBy('created_at', 'asc')->get();
+        return $UserList;
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function addList(Request $request){
+        $addList = new UserList();
+        $addList -> user_id = $request -> user_id;
+        $addList -> product_id = $request -> product_id;
+        $addList -> listname = $request -> listname;
+        $addList -> save();
+
+        return $addList;
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    
+    public function changeListName(Request $request, UserList $userList)
     {
-        //
+        $userList = UserList::where('user_id', $request -> user_id)->pluck('id');
+        UserList::whereIn('id', $userList)->update(['listname' => $request -> listname]); 
+        return $userList;    
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(UserList $userList)
-    {
-        //
-    }
+    public function moveList(Request $request){
+        $userList = UserList::where('user_id', $request -> user_id)
+        ->where('product_id', $request -> product_id)
+        ->get();
+        $userList -> listname = $request -> listname;
+        $userList -> save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(UserList $userList)
-    {
-        //
-    }
+        return $userList;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, UserList $userList)
-    {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserList $userList)
+    public function destroy(Request $request)
     {
-        //
+        $userList = UserList::destroy($request -> id);
+        return $userList;
     }
 }
