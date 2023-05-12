@@ -13,69 +13,74 @@ class SubCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //LAPTOPS
-        DB::table('SubCategory')->insert([
+        //Computadoras 
+        DB::table('sub_categories')->insert([
+            'id' => '1',
             'Category_id' => '1',
-            'description' => 'HUAWEI'
+            'description' => 'Laptop'
+            
         ]);
 
-        DB::table('SubCategory')->insert([
+        DB::table('sub_categories')->insert([
+            'id' => '2',
             'Category_id' => '1',
-            'description' => 'ASUS'
+            'description' => 'Computadora de escritorio'
         ]);
+
         
-        DB::table('SubCategory')->insert([
-            'Category_id' => '1',
-            'description' => 'HP'
-        ]);
-
         //Telefonos Celulares
-        DB::table('SubCategory')->insert([
+        DB::table('sub_categories')->insert([
+            'id' => '3',
             'Category_id' => '2',
-            'description' => 'SAMSUNG'
+            'description' => 'Android'
+        ]);
+        DB::table('sub_categories')->insert([
+            'id' => '4',
+            'Category_id' => '2',
+            'description' => 'iOS'
         ]);
         
-        DB::table('SubCategory')->insert([
-            'Category_id' => '2',
-            'description' => 'APPLE'
-        ]);
-        
-        DB::table('SubCategory')->insert([
-            'Category_id' => '2',
-            'description' => 'MOTOROLA'
-        ]);
-
+    
         //Accesorios
-        DB::table('SubCategory')->insert([
+        DB::table('sub_categories')->insert([
+            'id' => '5',
             'Category_id' => '3',
             'description' => 'MOUSE'
         ]);
-        
-        DB::table('SubCategory')->insert([
+        DB::table('sub_categories')->insert([
+            'id' => '6',
             'Category_id' => '3',
             'description' => 'TECLADO'
         ]);
-        
-        DB::table('SubCategory')->insert([
+        DB::table('sub_categories')->insert([
+            'id' => '7',
             'Category_id' => '3',
-            'description' => 'SILLA GAMER'
+            'description' => 'SILLAS'
+        ]);
+        DB::table('sub_categories')->insert([
+            'id' => '8',
+            'Category_id' => '3',
+            'description' => 'MOUSE PAD'
         ]);
 
+
         //Audio
-        
-        DB::table('SubCategory')->insert([
+        DB::table('sub_categories')->insert([
+            'id' => '9',
             'Category_id' => '4',
             'description' => 'BARRA DE SONIDO'
         ]);
-        
-        DB::table('SubCategory')->insert([
+
+        DB::table('sub_categories')->insert([
+            'id' => '10',
             'Category_id' => '4',
-            'description' => 'BOCINA BLUETOOTH'
+            'description' => 'BOCINA'
+        ]);
+        DB::table('sub_categories')->insert([
+            'id' => '11',
+            'Category_id' => '4',
+            'description' => 'AUDIFONOS'
         ]);
         
-        DB::table('SubCategory')->insert([
-            'Category_id' => '4',
-            'description' => 'AUDIFONOS TWS'
-        ]);
     }
 }

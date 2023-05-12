@@ -29,7 +29,7 @@ return new class extends Migration
 
             //el componente float se basa en 3 parametros, el nombre del campo, la cantidad de enteros que quieres y la cantidad de decimales que quieres
             //en este caso es precio, con 6 enteros y 2 decimales (999,999.99)
-            $table->float('price', 6, 2);
+            $table->float('price',10 , 2);
             $table->integer('stockQuantity');
             
             //Nota: En esta parte -> on(sub_categories) -> sub_categories -> es el nombre de la tabla en la base de datos) 

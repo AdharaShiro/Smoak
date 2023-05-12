@@ -1,4 +1,4 @@
-import { Col, Row, Button, Tab, Tabs, Carousel, Stack, Card } from 'react-bootstrap';
+import { Col, Row, Button, Tab, Tabs, Carousel, Stack, Card, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -28,12 +28,43 @@ function Main() {
   }, [])*/
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  //hace uso de la ruta del controlador y guarda la informacion en esta variable 
 
+
+  const getLastProducts = async () => {
+    try {
+      const responce = await axios.get(`http://localhost/Smoak/public/api/lastProducts`);
+      setlastProducts(responce.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const [lastProducts, setlastProducts] = useState([]);
+  useEffect(() => {
+    getLastProducts()
+  }, [])
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const carousel = document.querySelector('#carouselExampleFade');
+      const isPlaying = carousel.querySelector('.carousel-item-next, .carousel-item-prev');
+
+      if (!isPlaying) {
+        const next = carousel.querySelector('.carousel-item.active').nextElementSibling;
+        const index = next.getAttribute('data-bs-slide-to');
+        const btn = carousel.querySelector(`button[data-bs-slide-to="${index}"]`);
+        btn.click();
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="container">
       <div className="row">
-        <div id="carouselExampleFade" className="carousel slide carousel-fade">
+        <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img src="https://i.imgur.com/6vb9TyB.png" className="d-block w-100" alt="..." />
@@ -55,59 +86,40 @@ function Main() {
           </button>
         </div>
       </div>
-      <div className="row py-5">
 
+      <div className="row py-5">
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          <div className="col">
-            <div className="card h-100">
-              <img src="https://i.imgur.com/2GdxVqS.jpg" className="card-img-top" alt="" />
-              <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-                <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-              <div className="card-footer" style={{ textAlign: 'right' }}>
-                <div className="row">
-                  <div className="col" style={{textAlign: 'left'}}>
-                    <Checkbox {...label} title='Cart' icon={<AddShoppingCartIcon />} checkedIcon={<ShoppingCartIcon />} />
-                  </div>
-                  <div className="col px-3">
-                    <Checkbox {...label} title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                    <Checkbox {...label} title='Add to listing' icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />}/>
+          {lastProducts.map((lp) => (
+            // Contenido de la plantilla wiwi
+            <div className="col" key={lp.id}>
+              <div className="card h-100">
+                {/* Estructura del if  a la wiwi */}
+                {lp.photo === "" ? (
+                  <Image src="https://i.imgur.com/SZLTLGr.jpg" rounded></Image>
+                ) : (
+                  <Image src={lp.photo} rounded></Image>
+                )}
+                <div className="card-body">
+                  <h5 className="card-title">{lp.name}</h5>
+                  <p className="card-text">${lp.price}</p>
+                </div>
+                <div className="card-footer" style={{ textAlign: 'right' }}>
+                  <div className="row">
+                    <div className="col" style={{ textAlign: 'left' }}>
+                      <Checkbox {...label} title='Cart' icon={<AddShoppingCartIcon />} checkedIcon={<ShoppingCartIcon />} />
+                    </div>
+                    <div className="col px-3">
+                      <Checkbox {...label} title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                      <Checkbox {...label} title='Add to listing' icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col">
-            <div className="card h-100">
-              <img src="https://i.imgur.com/isgvv4n.jpg" className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-              </div>
-              <div className="card-footer">
-                <small className="text-body-secondary">Last updated 3 mins ago</small>
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="card h-100">
-              <img src="https://i.imgur.com/vSvfLV8.jpg" className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-              </div>
-              <div className="card-footer">
-                <small className="text-body-secondary">Last updated 3 mins ago</small>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-
       </div>
-
     </div>
-
   );
 }
 

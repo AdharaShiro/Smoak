@@ -84,4 +84,10 @@ class ProductController extends Controller
         $products = product::destroy($request->id);
         echo 'The product has been deleted successfully.';
     }
+
+    public function lastAdded (){
+        $lastProducts = product::orderBy('created_at', 'desc')->take(6)->get();
+        return $lastProducts;
+
+    }
 }

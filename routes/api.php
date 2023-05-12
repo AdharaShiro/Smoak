@@ -35,6 +35,7 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::post('/product_store', [ProductController::class, 'store']);
 Route::post('/product_update', [ProductController::class, 'update']);
 Route::post('/product_delete', [ProductController::class, 'destroy']);
+Route::get('/lastProducts',[ProductController::class, 'lastAdded']);
 
 //Category Routes
 Route::get('/categories', [CategoryController::class, 'index']);
@@ -50,6 +51,7 @@ Route::post('/subcategory_delete', [SubCategoryController::class, 'destroy]']);
 
 //Cart Routes
 Route::get('/cart/{id}', [CartController::class, 'index']);
+Route::get('/countProducts/{id}', [CartController::class, 'countProducts']);
 Route::post('/cart_store', [CartController::class, 'store']);
 Route::post('/cart_update', [CartController::class, 'update']);
 Route::post('/cart_delete', [CartController::class, 'destroy']);

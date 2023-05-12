@@ -1,8 +1,27 @@
 import { Nav, Navbar, NavDropdown, Row, Col, Container } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
-import {IconButton} from '@mui/material';
+import { Badge, IconButton } from '@mui/material';
+import { useState, useEffect } from 'react';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 function BasicExample() {
+
+    const getCountProducts = async () => {
+        const user_id = localStorage.getItem('user_id');
+        try {
+            const response = await axios.get(`http://localhost/Smoak/public/api/countProducts/${user_id}`);
+            setcountProducts(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const [countProducts, setcountProducts] = useState([]);
+    useEffect(() => {
+        getCountProducts()
+    }, [])
+
     return (
         <>
             <header>
@@ -22,9 +41,9 @@ function BasicExample() {
                             </Nav>
                             <Nav align="end">
                                 <Nav.Link as={Link} to='/smoak/public/carrito'>
-                                    <IconButton aria-label="cart">
-                                            <i className="material-icons">shopping_cart</i>
-                                    </IconButton>
+                                    <Badge badgeContent={countProducts} color="primary">
+                                        <ShoppingCartIcon />
+                                    </Badge>
                                 </Nav.Link>
                             </Nav>
                             <NavDropdown id="dropright" align="end" title={<img src="https://i.postimg.cc/rmY3H9RD/log.png"

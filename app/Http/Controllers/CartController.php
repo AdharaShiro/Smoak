@@ -18,6 +18,11 @@ class CartController extends Controller
         return $cart;
     }
 
+
+    public function countProducts($user){
+        $countProducts = cart::where('user_id', $user)->count();
+        return $countProducts;
+    }
      /**
      * Store a newly created resource in storage.
      */
@@ -27,14 +32,12 @@ class CartController extends Controller
             'user_id' => 'required',
             'product_id' => 'required',
             'quantity' => 'required',
-            'finalPrice' => 'required',
         ]);
         
         $cart = new cart();
         $cart -> user_id = $request -> user_id;
         $cart -> product_id = $request -> product_id;
         $cart -> quantity = $request -> quantity;
-        $cart -> finalPrice = $request -> finalPrice;
         $cart -> save();
 
         return $cart;

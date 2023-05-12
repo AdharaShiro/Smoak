@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use League\CommonMark\Reference\Reference;
 
 class ProductSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         //Laptops
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Laptop Huawei Matebook ',
             'model' => 'D14',
             'brand' => 'HUAWEI',
@@ -26,11 +27,12 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => '56 Wh',
             'CPU' => 'Intel Core i3-10110U ',
 
-            'price' => '$13,999.00',
+            'price' => '13999.00',
             'stockQuantity' => '10',
+             'subCategory_id' => '1',
         ]);
 
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Laptop Gaming Asus TUF GAMING',
             'model' => 'F15',
             'brand' => 'ASUS',
@@ -42,28 +44,31 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => '56 Wh',
             'CPU' => 'Intel Core i5-10300H ',
 
-            'price' => '$26,399.00',
+            'price' => '26399.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '1',
         ]);
         
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Laptop HP 14',
             'model' => 'DK1032WM',
             'brand' => 'HP',
             'color' => 'Plata',
             'photo' => '',
 
+
             'storage' => '128GB SSD ',
             'RAM' => '4GB RAM ',
             'batteryCapacity' => '56 Wh',
             'CPU' => 'Gráficos Radeon Vega 3 ',
 
-            'price' => '$10,999.00',
+            'price' => '10999.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '1',
         ]);
         
         //Telefonos Celulares
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Samsung Galaxy S23 5G ',
             'model' => 'F15',
             'brand' => 'SAMSUNG',
@@ -75,11 +80,12 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => '4700 mAh',
             'CPU' => 'NA',
 
-            'price' => '$23,499.00',
+            'price' => '23499.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '3',
         ]);
         
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Apple Iphone 14 plus',
             'model' => '14',
             'brand' => 'Apple',
@@ -91,11 +97,12 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => '3095 mAh',
             'CPU' => 'CPU de 6 núcleos con 2 núcleos de rendimiento y 4 de eficiencia. GPU de 5 núcleos. Neural Engine de 16 núcleos',
 
-            'price' => '$23,999.00',
+            'price' => '23999.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '4',
         ]);
         
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Moto Edge 30 Ultra',
             'model' => 'Edge 30',
             'brand' => 'Motorola',
@@ -107,12 +114,13 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => '4,600 mAh',
             'CPU' => 'Procesador 8 Núcleos',
 
-            'price' => '$26,999.00',
+            'price' => '26999.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '3',
         ]);
         
         //Accesorios
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Mouse Gamer Razer Viper ',
             'model' => 'RZ01-02550400-B ',
             'brand' => 'Razer',
@@ -124,11 +132,12 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => 'NA',
             'CPU' => 'NA',
 
-            'price' => '$999.00',
+            'price' => '999.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '5',
         ]);
         
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Teclado Bluetooth Multidispositivos Logitech POP ',
             'model' => 'Fresh Vibes',
             'brand' => 'Logitech',
@@ -140,11 +149,12 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => 'NA',
             'CPU' => 'NA',
 
-            'price' => '$1,799.00',
+            'price' => '1799.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '6',
         ]);
 
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Silla Gamer Deportiva Corsair',
             'model' => 'TC60 FABRIC BLACK - CF-9010041-WW',
             'brand' => 'Corsair',
@@ -156,13 +166,14 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => 'NA',
             'CPU' => 'NA',
 
-            'price' => '$4,299.00',
+            'price' => '4299.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '7',
         ]);
 
         //Audio 
         
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Galaxy Buds 2 Pro',
             'model' => 'SM-R510NZAAXAR',
             'brand' => 'Samsung ',
@@ -176,11 +187,12 @@ class ProductSeeder extends Seeder
              sintoniza lo que más importa sin ser molestado por los sonidos distraídos a tu alrededor. Calidad de sonido de alta fidelidad: el sonido de calidad de estudio no es solo para los profesionales; 
              siente cada nota como si estuvieras ahí con Galaxy Buds2 Pro** y obtén una experiencia auditiva de siguiente nivel, ya sea que estés saliendo a tu lista de reproducción o manteniéndote informado con un podcast.',
 
-            'price' => '$2,947.00',
+            'price' => '2947.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '11',
         ]);
 
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Barra de sonido Hisense',
             'model' => 'HS218',
             'brand' => 'Hisense',
@@ -194,11 +206,12 @@ class ProductSeeder extends Seeder
              Actualizará el sonido de tu televisor al instante. Subwoofer inalámbrico: un subwoofer inalámbrico dedicado de 80 vatios ofrece las frecuencias de gama baja robustas que puntuan tus películas, música y juegos favoritos, sin cables desordenados. 
              Sentirás el "boom" mientras que los dos altavoces frontales proyectan frecuencias brillantes y claras de alto y medio.',
 
-            'price' => '$4,299.00',
+            'price' => '4299.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '9',
         ]);
 
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Silla Gamer Deportiva Corsair',
             'model' => 'TC60 FABRIC BLACK - CF-9010041-WW',
             'brand' => 'Corsair',
@@ -210,11 +223,12 @@ class ProductSeeder extends Seeder
             'batteryCapacity' => 'NA',
             'CPU' => 'NA',
 
-            'price' => '$3,329.00',
+            'price' => '3329.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '7',
         ]);
 
-        DB::table('Product')->insert([
+        DB::table('products')->insert([
             'name' => 'Bocina Sony Bluetooth',
             'model' => 'SRS-XB13/BC LA',
             'brand' => 'Sony',
@@ -227,8 +241,9 @@ class ProductSeeder extends Seeder
             'Description' => 'Sonido potente con EXTRA BASS, hasta 16hrs de duración de batería, con micrófono para función de manos libres, procesador de difusión del sonido dispersa aún más el sonido. 
             Resistente al agua y al polvo IP67, conecta dos bocinas para un sonido más potente y sonido estéreo. Carga rápida USB type-C.',
 
-            'price' => '$1,279.00',
+            'price' => '1279.00',
             'stockQuantity' => '10',
+            'subCategory_id' => '10',
         ]);
     }
 }

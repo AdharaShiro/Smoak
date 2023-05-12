@@ -14,25 +14,25 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         //Computadoras
-        DB::table('Category')->insert([
+        DB::table('categories')->insert([
             'id' => '1',
             'description' => 'COMPUTADORAS',
         ]);
 
         //Telefonos Celulares
-        DB::table('Category')->insert([
+        DB::table('categories')->insert([
             'id' => '2',
             'description' => 'TELEFONOS CELULARES',
         ]);
 
         //Audio
-        DB::table('Category')->insert([
+        DB::table('categories')->insert([
             'id' => '3',
             'description' => 'AUDIO',
         ]);
 
         //Accesorios
-        DB::table('Category')->insert([
+        DB::table('categories')->insert([
             'id' => '4',
             'description' => 'ACCESORIOS',
         ]);
