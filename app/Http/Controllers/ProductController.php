@@ -85,3 +85,5 @@ class ProductController extends Controller
         echo 'The product has been deleted successfully.';
     }
 }
+
+//
