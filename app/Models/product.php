@@ -14,10 +14,9 @@ class product extends Model
     }
     public function order(){
         return $this -> belongsTo(orders::class);
-    }
+    }    
 
     public function cart(){
-        return $this -> belongsTo(cart::class);
+        return $this -> hasMany(product::class, 'product_id');
     }
-    
 }

@@ -35,12 +35,12 @@ function BasicExample() {
                         <Navbar.Collapse id="navbarScroll">
 
                             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-                                <Nav.Link as={Link} to='/smoak/public/productos'>Productos</Nav.Link>
+                                <Nav.Link as={Link} to='/smoak/public/catalogue'>Productos</Nav.Link>
                                 <Nav.Link as={Link} to='/smoak/public/metodo'>Metodos de pago</Nav.Link>
                                 <Nav.Link as={Link} to='/smoak/public/centro'>¿Necesitas ayuda?</Nav.Link>
                             </Nav>
                             <Nav align="end">
-                                <Nav.Link as={Link} to='/smoak/public/carrito'>
+                                <Nav.Link as={Link} to='/smoak/public/cart'>
                                     <Badge badgeContent={countProducts} color="primary">
                                         <ShoppingCartIcon />
                                     </Badge>

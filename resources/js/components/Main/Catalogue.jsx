@@ -33,7 +33,7 @@ function Main() {
 
   const getLastProducts = async () => {
     try {
-      const responce = await axios.get(`http://localhost/Smoak/public/api/lastProducts`);
+      const responce = await axios.get(`http://localhost/Smoak/public/api/products`);
       setlastProducts(responce.data);
     } catch (error) {
       console.error(error);
@@ -44,7 +44,7 @@ function Main() {
   useEffect(() => {
     getLastProducts()
   }, [])
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       const carousel = document.querySelector('#carouselExampleFade');
@@ -63,54 +63,46 @@ function Main() {
 
   return (
     <div className="container">
-    <div className="row">
-      <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="https://i.imgur.com/u4fHzEs.png" className="d-block w-100" alt="..." />
+      <div className="row">
+        <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src="https://i.imgur.com/3DSQrYF.jpg" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/prIHrjH.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/Buo1IIf.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/KWKVDrn.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/ddWqQdO.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/skwFOL1.png" className="d-block w-100" alt="..." />
+            </div>
           </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/Tt8aBqn.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/j3wjxv5.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/x5R3DLQ.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/EC05KlX.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/Ld6Fk1u.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/KzHWVq3.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/geN1zWE.png" className="d-block w-100" alt="..." />
-          </div>
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+          </button>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
-
-  
 
       <div className="row py-5">
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {lastProducts.map((lp) => (
-            // Contenido de la plantilla wiwi
+           
             <div className="col" key={lp.id}>
               <div className="card h-100">
-                {/* Estructura del if  a la wiwi */}
+              
                 {lp.photo === "" ? (
                   <Image src="https://i.imgur.com/SZLTLGr.jpg" rounded></Image>
                 ) : (
@@ -141,8 +133,3 @@ function Main() {
 }
 
 export default Main;
-
-
-/*
-
-*/

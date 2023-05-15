@@ -32,6 +32,7 @@ Route::post('/login',[PassportAuthController::class, 'login']);
 
 //Products Routes
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/product_id/{product_id}', [ProductController::class, 'product_id']);
 Route::post('/product_store', [ProductController::class, 'store']);
 Route::post('/product_update', [ProductController::class, 'update']);
 Route::post('/product_delete', [ProductController::class, 'destroy']);
