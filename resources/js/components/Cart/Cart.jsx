@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 //sb-fo43mb22318371@personal.example.com | 0@KV|W4a
 
 function ProductUpdate(props) {
-    const endpoint = 'http://localhost/smoak/public/api/cart_update'
+    const endpoint = 'http://localhost/Smoak/public/api/cart_update'
     const [quantity, setquantity] = useState('')
     const updateProduct = async (id) => {
         await axios.post(endpoint, { product_id: product_id, quantity: quantity })
@@ -48,7 +48,7 @@ function ProductUpdate(props) {
 }
 const user = localStorage.getItem("user");
 function ProductDeleted(props) {
-    const endpoint = 'http://localhost/smoak/public/api/cart_delete'
+    const endpoint = 'http://localhost/Smoak/public/api/cart_delete'
     const deleteProduct = async (id) => {
         await axios.post(endpoint, { id: id, user: user})
         alert("Product eliminado");
@@ -87,7 +87,7 @@ function Carrito() {
     }
 
     const getAllProduct = async () => {
-        const response = await axios.get(`http://localhost/smoak/public/api/cart/${user}`);
+        const response = await axios.get(`http://localhost/Smoak/public/api/cart/${user}`);
         setProduct(response.data)
     }
 

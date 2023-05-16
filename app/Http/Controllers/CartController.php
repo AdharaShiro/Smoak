@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\cart;
+use App\Models\product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -14,8 +15,8 @@ class CartController extends Controller
     {
         //Aquí en el momento de mandar a buscar un carrito se debe de filtrar por el usuario que tiene el carrito activo en la tabla de carritos.
         //Ya que al ponerle All() como a otros métodos te traería todo lo de todos los usuarios y no lo de los activos.
-        $cart = cart::where('user_id', $user)->with('products')->get();
-        return $cart;
+        $cart = cart::where('user_id', $user)->get();
+        return product::where('id', $cart[0]->product_id)->get();
     }
 
 
