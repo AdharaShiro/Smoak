@@ -1,21 +1,19 @@
-import { Button, Form, Col, Row, Table, Modal } from 'react-bootstrap';
+import { Button, Form, Col, Row, Table, Modal, Image } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from "react-dom"
 import { useNavigate } from 'react-router-dom';
 
-//CUENTA 
-//sb-fo43mb22318371@personal.example.com | 0@KV|W4a
+
 
 function ProductUpdate(props) {
     const endpoint = 'http://localhost/Smoak/public/api/cart_update'
     const [quantity, setquantity] = useState('')
     const updateProduct = async (id) => {
         await axios.post(endpoint, { product_id: product_id, quantity: quantity })
-        alert("Product actualizado");
+        alert("Producto actualizado");
         navigate('/carro')
     }
-
 
     return (
         <Modal
@@ -51,7 +49,7 @@ function ProductDeleted(props) {
     const endpoint = 'http://localhost/Smoak/public/api/cart_delete'
     const deleteProduct = async (id) => {
         await axios.post(endpoint, { id: id, user: user})
-        alert("Product eliminado");
+        alert("Producto eliminado");
         navigate('/')
     }
     return (
@@ -74,16 +72,16 @@ function ProductDeleted(props) {
 }
 
 
-function Carrito() {
+function Cart() {
     const navigate = useNavigate();
     const [modalShow1, setModalShow1] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
-    const [productDatos, setProductDatos] = useState({});
+    const [ProductData, setProductDatos] = useState({});
 
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user_id");
     if (token == null) {
-        navigate("/example-app/public/login")
+        navigate("/Smoalk/public/login")
     }
 
     const getAllProduct = async () => {
@@ -107,29 +105,29 @@ function Carrito() {
         setProductDatos(product)
     }
 
-    const productsVendidos = async (e) => {
+    const soldProducts = async (e) => {
         e.preventDefault();
         const user = localStorage.getItem("user");
-        const endpoint = 'http://localhost/example-app/public/api/productsVendidos';
+        const endpoint = '';
         await axios.post(endpoint, {user: user});
         alert("Compra hecha");
-        navigate('/example-app/public/');
+        navigate('/Smoak/public/');
     }
 
     var subtotal = 0;
-    var cant = 0;
+    var amount = 0;
     {
         Product.map((item) => (
-            subtotal = subtotal + (item.precio * item.quantity)
+            subtotal = subtotal + (item.price * item.quantity)
         ))
     }
     {
         Product.map((item) => (
-            cant = cant + (1 * item.quantity)
+            amount = amount + (1 * item.quantity)
         ))
     }
     console.log("subtotal:", subtotal)
-    console.log("quantity:", cant)
+    console.log("quantity:", amount)
 
 
     return (
@@ -149,11 +147,9 @@ function Carrito() {
                                         <tr>
                                             <th>#</th>
                                             <th>Imagen</th>
-                                            <th>Product</th>
-                                            <th>Memoria</th>
-                                            <th>Color</th>
+                                            <th>Producto</th>
                                             <th>Precio</th>
-                                            <th>quantity</th>
+                                            <th>Cantidad</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -161,24 +157,22 @@ function Carrito() {
                                         {Product.map((products) => (
                                             <tr key={products.id}>
                                                 <td>{products.id}</td>
-                                                <td><img src={products.imagen} alt="imagen {products.id}" width="100px" /></td>
-                                                <td>{products.product}</td>
-                                                <td>{products.memoria}</td>
-                                                <td>{products.color}</td>
-                                                <td>{products.precio}</td>
-                                                <td>{products.quantity}</td>
+                                                <td><Image src={products.photo} width={100}></Image></td>
+                                                <td>{products.name}</td>
+                                                <td>{products.price}</td>
+                                                <td>{products.amount}</td>
                                                 <td>
                                                     <Button variant="warning" onClick={() => editProduct(products)}>Editar</Button>{' '}
                                                     <ProductUpdate
                                                         show={modalShow1}
                                                         onHide={() => setModalShow1(false)}
-                                                        product={productDatos}
+                                                        product={ProductData}
                                                     />
                                                     <Button variant="danger" onClick={() => deleteProduct(products)}>Eliminar</Button>{' '}
                                                     <ProductDeleted
                                                         show={modalShow2}
                                                         onHide={() => setModalShow2(false)}
-                                                        product={productDatos}
+                                                        product={ProductData}
                                                     />
                                                 </td>
                                             </tr>
@@ -192,10 +186,10 @@ function Carrito() {
                                 <h1>Subtotal:</h1>
                                 <h2><strong>$</strong>{subtotal}</h2>
                                 <br />
-                                <h4> <strong>{cant}</strong> product(s) </h4>
+                                <h4> <strong>{amount}</strong> product(s) </h4>
                                 <div className="d-grid gap-2" style={{ marginLeft: "5%", marginRight: "5%" }}>
                                     <div>
-                                        <Button variant="Primary" size="lg" onClick={productsVendidos}>
+                                        <Button variant="Primary" size="lg" onClick={soldProducts}>
                                             Realizar compra
                                         </Button>
                                     </div>
@@ -209,4 +203,4 @@ function Carrito() {
     );
 }
 
-export default Carrito;
+export default Cart;

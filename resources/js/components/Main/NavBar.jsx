@@ -65,54 +65,40 @@ function BasicExample() {
                 </section>
             </div>
 
-            <footer style={{ backgroundColor: '#00acc1' }}>
+            <footer style={{ backgroundColor: '#0000' }}>
                 <br />
                 <div>
                     <Container>
-                        <Row>
-                            <Col>
-                                <h4>Terminos y condiciones</h4>
+                        <div class="card text-bg-dark">
+                            <img src="https://i.imgur.com/qis7Kz3.png" height="200em" class="card-img" alt="..." />
+                            <div class="card-img-overlay">
+                                <Row>
+                                    <Col>
+                                    </Col>
 
-                                <p><a href="">Busqueda</a></p>
-                                <p><a href="">Términos del servicio</a></p>
-                            </Col>
+                                    <Col>
+                                        <h5>Contáctanos</h5>
 
-                            <Col>
-                                <h4>Contáctanos</h4>
+                                        <p><a  href="">servicioCliente@SmoakTechnologies.mx</a></p>
+                                    </Col>
+                                
+                                    <Col>
+                                        <h5>nosoros</h5>
+                                        <p><a href="">¿quienes Somos?</a></p>
+                                        <p><a href="">Segurdad</a></p>
+                                        <p><a href="">Calidad</a></p>
+                                    </Col>
+                                    <Col>
+                                        <h5>Polticas del sitio</h5>
+                                        
+                                        <p><a href="">Términos y condiciones</a></p>
+                                        <p><a href=""> Cookies</a></p>
+                                        <p><a href="">Políticas de Envío</a></p>
+                                    </Col>
+                                </Row>
+                            </div>
+                        </div>
 
-                                <p><a href="">servicioalcliente@SmoakTechnologies.com.mx</a></p>
-                                <p>Encuentra nuestros productos en cualquiera de los siguientes tiendas <a href="">MARKETPLACES</a>:</p>
-                                <ul>
-                                    <li>
-                                        Sanbors/ Liverpool
-                                    </li>
-                                    <li>
-                                        Mercado / Amazon
-                                    </li>
-                                    <li>
-                                        DDTECH
-                                    </li>
-                                </ul>
-                            </Col>
-
-                            <Col>
-                                <h3>NOSOTROS</h3>
-
-                                <p><a href="">¿QUIÉNES SOMOS?</a></p>
-                                <p><a href="">MEDIO AMBIENTE</a></p>
-                                <p><a href="">SEGURIDAD</a></p>
-                                <p><a href="">CALIDAD</a></p>
-                            </Col>
-
-                            <Col>
-                                <h3>POLÍTICAS DEL SITIO</h3>
-
-                                <p><a href="">Tratamiento de Datos</a></p>
-                                <p><a href="">Términos y condiciones</a></p>
-                                <p><a href="">Política de Cookies</a></p>
-                                <p><a href="">Políticas de Envío</a></p>
-                            </Col>
-                        </Row>
                     </Container>
                 </div>
             </footer>
@@ -122,4 +108,3 @@ function BasicExample() {
 
 
 export default BasicExample;
-//as={Link} to="/librar.io/public/login"
