@@ -63,54 +63,54 @@ function Main() {
 
   return (
     <div className="container">
-    <div className="row">
-      <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="https://i.imgur.com/u4fHzEs.png" className="d-block w-100" alt="..." />
+      <div className="row">
+        <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src="https://i.imgur.com/u4fHzEs.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/Tt8aBqn.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/j3wjxv5.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/x5R3DLQ.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/EC05KlX.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/Ld6Fk1u.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/KzHWVq3.png" className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="https://i.imgur.com/geN1zWE.png" className="d-block w-100" alt="..." />
+            </div>
           </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/Tt8aBqn.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/j3wjxv5.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/x5R3DLQ.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/EC05KlX.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/Ld6Fk1u.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/KzHWVq3.png" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://i.imgur.com/geN1zWE.png" className="d-block w-100" alt="..." />
-          </div>
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+          </button>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
 
-  
+
 
       <div className="row py-5">
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {lastProducts.map((lp) => (
-            // Contenido de la plantilla wiwi
+            // Contenido de la plantilla 
             <div className="col" key={lp.id}>
               <div className="card h-100">
-                {/* Estructura del if  a la wiwi */}
+                {/* Estructura del if   */}
                 {lp.photo === "" ? (
                   <Image src="https://i.imgur.com/SZLTLGr.jpg" rounded></Image>
                 ) : (
@@ -123,10 +123,11 @@ function Main() {
                 <div className="card-footer" style={{ textAlign: 'right' }}>
                   <div className="row">
                     <div className="col" style={{ textAlign: 'left' }}>
-                      <Checkbox {...label} title='Cart' icon={<AddShoppingCartIcon />} checkedIcon={<ShoppingCartIcon />} />
+                      <Checkbox {...label} 
+                      title='Cart' icon={<AddShoppingCartIcon />} checkedIcon={<ShoppingCartIcon />} />
                     </div>
                     <div className="col px-3">
-                      <Checkbox {...label} title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                      <Checkbox  title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
                       <Checkbox {...label} title='Add to listing' icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />
                     </div>
                   </div>

@@ -8,7 +8,11 @@ import Index from "./Main/Index";
 import Catalogue from "./Main/Catalogue";
 import AuthProvider from "./AuthContext";
 import Cart from "./Cart/Cart";
-
+import AdmNav from "./Admin/AdmNav";
+import AdminCategories from "./Admin/AdminCategories";
+import AdminProducts from "./Admin/AdminProducts";
+import AdminSubcategories from "./Admin/AdminSubcategories";
+import AdminUser from "./Admin/AdminUser";
 
 export default function App() {
     return (
@@ -22,6 +26,14 @@ export default function App() {
                             <Route path="register" element={<Register />} />
                             <Route path="catalogue" element={<Catalogue />} />
                             <Route path="cart" element={<Cart />} />
+                            
+                        </Route>
+                        <Route path="/smoak/public/admin" element={<AdmNav/>}>
+                            <Route index element={<AdminCategories/>}/>
+                            <Route path="admcategories" element={<AdminCategories/>}/>
+                            <Route path="admsubcategories" element={<AdminSubcategories/>}/>
+                            <Route path="admproducts" element={<AdminProducts/>}/>
+                            {/* <Route path="admuser" element={}/> */}
                         </Route>
                     </Routes>
                 </AuthProvider>

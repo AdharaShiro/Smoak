@@ -10,10 +10,19 @@ import { AuthContext } from '../AuthContext';
 
 const theme = createTheme();
 
+//password andy456:D admin456:D
+
 export default function SignIn() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
+
+    const validateEmail = (email) => {
+        // Expresión regular para validar el formato del correo
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
 
     const { setUserLogged, setUser } = useContext(AuthContext);
     const [textError, setTextError] = useState('');
@@ -21,7 +30,6 @@ export default function SignIn() {
 
     const login = async (e) => {
         e.preventDefault();
-        console.log("Login")
 
         const headers = {
             'Content-Type': 'application/json',
@@ -38,65 +46,67 @@ export default function SignIn() {
                 localStorage.setItem("user", JSON.stringify(response.data.user));
                 setUser(response.data.user);
                 localStorage.setItem("user_id", response.data.user.id);
-                alert("Welcome back, " + response.data.user.name + " " + response.data.user.lastName);
-                navigate('/smoak/public/')
 
-                //$user = localStorage.getItem("user_id");
-
-
-                //console.log("token: ", response.data.token);
-
-
+                console.log(response.data.user.role);
 
                 // Rutas de inicio de sesión. 
-
-
-                /*if (response.data.user.rol === "Administrador") {
-                    console.log("Sesión iniciada", email, password); //Muestra lo que recibe 
-                    console.log("Administrador: ", response.data.user.nombre, " ", response.data.user.apellido);
-                    alert("Sesión iniciada " + response.data.user.nombre + " " + response.data.user.apellido)
-                    navigate('/example-app/public/admin');
+                if (response.data.user.role === "admin") {
+                    alert("Sesión iniciada. \nAdministrador: \n", email); //Muestra lo que recibe 
+                    navigate('/smoak/public/admin')
                 } else {
-                    alert("Sesión iniciada " + response.data.user.nombre +  " " + response.data.user.apellido)
-                    navigate('/example-app/public/');
-                }*/
+                    alert("Sesión iniciada: " + response.data.user.name + " " + response.data.user.lastName)
+                    navigate('/smoak/public/');
+                }
             }).catch(error => {
-                console.log("error")
-                setTextError("La contraseña o correo es incorrecto");
-                setFormOk(false);
-                console.log(textError);
+                alert("La contraseña o correo es incorrecto");
             });
     }
 
 
     return (
         <>
-            <Form onSubmit={login}>
-                <InputGroup className="mb-3">
-                    <TextField
-                        label="Email"
-                        variant="outlined"
-                        fullWidth
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </InputGroup>
+            <div className="container-sm p-5">
+                <div className="row">
+                    <div className="col-6">
+                        {/* ICONO */}
+                        <Form onSubmit={login}>
+                            <InputGroup className="mb-3">
+                                <TextField
+                                    label="Email"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    error={!validateEmail(email)}
+                                    helperText={!validateEmail(email) ? 'Ingrese un correo válido' : ''}
+                                    required
+                                />
+                            </InputGroup>
 
-                <InputGroup className="mb-3">
-                    <TextField
-                        label="Password"
-                        variant="outlined"
-                        type="password"
-                        fullWidth
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </InputGroup>
+                            <InputGroup className="mb-3">
+                                <TextField
+                                    label="Password"
+                                    variant="outlined"
+                                    type="password"
+                                    fullWidth
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    inputProps={{
+                                        minLength: 8,
+                                    }}
+                                    required
+                                />
+                            </InputGroup>
 
-                <Button variant="primary" type="submit">
-                    Login
-                </Button>
-            </Form>
+                            <Button variant="primary" type="submit">
+                                Login
+                            </Button>
+                        </Form>
+                    </div>
+                </div>
+
+            </div>
+
         </>
     );
 }

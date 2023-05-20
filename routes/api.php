@@ -27,28 +27,21 @@ use Illuminate\Support\Facades\Route;
 
 
 //Login Routes
-Route::post('/register',[PassportAuthController::class, 'register']);
-Route::post('/login',[PassportAuthController::class, 'login']);
+Route::post('/register', [PassportAuthController::class, 'register']);
+Route::post('/login', [PassportAuthController::class, 'login']);
 
 //Products Routes
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/product_id/{product_id}', [ProductController::class, 'product_id']);
-Route::post('/product_store', [ProductController::class, 'store']);
-Route::post('/product_update', [ProductController::class, 'update']);
-Route::post('/product_delete', [ProductController::class, 'destroy']);
-Route::get('/lastProducts',[ProductController::class, 'lastAdded']);
+Route::get('/lastProducts', [ProductController::class, 'lastAdded']);
 
 //Category Routes
 Route::get('/categories', [CategoryController::class, 'index']);
-Route::post('/category_store', [CategoryController::class, 'store']);
-Route::post('/category_update', [CategoryController::class, 'update']);
-Route::post('/category_delete', [CategoryController::class, 'destroy']);
+
 
 //Subcategory Routes
 Route::get('/subcategories', [SubCategoryController::class, 'index']);
-Route::post('/subcategory_store', [SubCategoryController::class, 'store']);
-Route::post('/subcategory_update', [SubCategoryController::class, 'update']);
-Route::post('/subcategory_delete', [SubCategoryController::class, 'destroy]']);
+
 
 //Cart Routes
 Route::get('/cart/{id}', [CartController::class, 'index']);
@@ -59,17 +52,41 @@ Route::post('/cart_delete', [CartController::class, 'destroy']);
 
 //Order Routes
 Route::get('/order/{id}', [OrdersController::class, 'index']);
-Route::post('/order_store', [OrdersController::class, 'store']);
-Route::post('/order_update', [OrdersController::class, 'update']);
-Route::post('/order_delete', [OrdersController::class, 'destroy']);
+
 
 //Address Routes
 Route::get('/address/{id}', [AddressController::class, 'index]']);
 Route::post('/address_store', [AddressController::class, 'store']);
-Route::post('/address_update',[AddressController::class, 'update']);
+Route::post('/address_update', [AddressController::class, 'update']);
 Route::post('/address_delete', [AddressController::class, 'destroy']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth:api')->group(
+    function () {
+
+        //Products Routes admin protected.
+        Route::post('/product_store', [ProductController::class, 'store']);
+        Route::post('/product_update', [ProductController::class, 'update']);
+        Route::post('/product_delete', [ProductController::class, 'destroy']);
+
+        //Category Routes
+        Route::post('/category_store', [CategoryController::class, 'store']);
+        Route::post('/category_update', [CategoryController::class, 'update']);
+        Route::post('/category_delete', [CategoryController::class, 'destroy']);
+
+        //Subcategory Routes
+        Route::post('/subcategory_store', [SubCategoryController::class, 'store']);
+        Route::post('/subcategory_update', [SubCategoryController::class, 'update']);
+        Route::post('/subcategory_delete', [SubCategoryController::class, 'destroy]']);
+
+        //Order Routes
+
+        Route::post('/order_store', [OrdersController::class, 'store']);
+        Route::post('/order_update', [OrdersController::class, 'update']);
+        Route::post('/order_delete', [OrdersController::class, 'destroy']);
+    }
+);
