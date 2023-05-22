@@ -50,6 +50,7 @@ function Store(props) {
             name: name, model: model, brand: brand, color: color,
             photo: photo, storage: storage, RAM: RAM, batteryCapacity: batteryCapacity,
             Description: description, CPU: CPU, price: price, stockQuantity: stockQuantity, subCategory: subcategory_id
+        },
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -273,7 +274,7 @@ function Update(props) {
         await axios.post(endpoint, {
             name: name, model: model, brand: brand, color: color,
             photo: photo, storage: storage, RAM: RAM, batteryCapacity: batteryCapacity,
-            Description: description, CPU: CPU, price: price, stockQuantity: stockQuantity, subCategory_id: subcategory_id
+            Description: description, CPU: CPU, price: price, stockQuantity: stockQuantity, subCategory: subcategory_id
         },
             {
                 headers: {
@@ -643,7 +644,6 @@ function AdminProducts(props) {
                             <td>{Product.price}</td>
                             <td>{Product.stockQuantity}</td>
                             <td>{Product.subcategory_id}</td>
-{/* El Jared estuvo aquí, ya se jue has pruebas de todo, ya se me hizo tarde baaaaaaaaai */}
                             <td className='text-end'>
 
                                 <IconButton variant="outline-warning" onClick={() => productEdit(Product)}>
