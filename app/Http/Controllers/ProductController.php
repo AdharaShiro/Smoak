@@ -49,6 +49,11 @@ class ProductController extends Controller
         $product -> brand = $request -> brand;
         $product -> color = $request -> color;
         $product -> photo = $request -> photo;
+        $product -> storage = $request -> storage;
+        $product -> RAM = $request -> RAM;
+        $product -> batteryCapacity = $request -> batteryCapacity;
+        $product -> description = $request -> description;
+        $product -> CPU = $request -> CPU;
         $product -> price = $request -> price;
         $product -> stockQuantity = $request -> stockQuantity;
         $product -> subCategory_id = $request -> subCategory;
