@@ -49,8 +49,7 @@ function Store(props) {
         await axios.post(endpoint, {
             name: name, model: model, brand: brand, color: color,
             photo: photo, storage: storage, RAM: RAM, batteryCapacity: batteryCapacity,
-            Description: description, CPU: CPU, price: price, stockQuantity: stockQuantity, subCategory_id: subcategory_id
-        },
+            Description: description, CPU: CPU, price: price, stockQuantity: stockQuantity, subCategory: subcategory_id
             {
                 headers: {
                     'Content-Type': 'application/json',
