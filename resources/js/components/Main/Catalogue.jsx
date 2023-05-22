@@ -2,13 +2,10 @@ import { Col, Row, Button, Tab, Tabs, Carousel, Stack, Card, Image } from 'react
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { IconButton } from '@mui/material';
 
 function Main() {
   /*const getAllProducto = async (id = 1) => {
@@ -40,11 +37,27 @@ function Main() {
     }
   }
 
+  const addCart = async (product_id) => {
+    try {
+      const quantity = 1;
+      const token = localStorage.getItem("token");
+      const user_id = localStorage.getItem("user_id");
+      if (token !== null) {
+        const endpoint = 'http://localhost/Smoak/public/api/cart_store'
+        await axios.post(endpoint, { user_id: user_id, product_id: product_id, quantity: quantity })
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
   const [lastProducts, setlastProducts] = useState([]);
   useEffect(() => {
     getLastProducts()
   }, [])
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       const carousel = document.querySelector('#carouselExampleFade');
@@ -99,10 +112,10 @@ function Main() {
       <div className="row py-5">
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {lastProducts.map((lp) => (
-           
+
             <div className="col" key={lp.id}>
               <div className="card h-100">
-              
+
                 {lp.photo === "" ? (
                   <Image src="https://i.imgur.com/SZLTLGr.jpg" rounded></Image>
                 ) : (
@@ -115,11 +128,17 @@ function Main() {
                 <div className="card-footer" style={{ textAlign: 'right' }}>
                   <div className="row">
                     <div className="col" style={{ textAlign: 'left' }}>
-                      <Checkbox {...label} title='Cart' icon={<AddShoppingCartIcon />} checkedIcon={<ShoppingCartIcon />} />
+                      <IconButton onClick={() => addCart(lp.id)}>
+                        <AddShoppingCartIcon />
+                      </IconButton>
                     </div>
                     <div className="col px-3">
-                      < Checkbox {...label} title='Favorite' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                      <Checkbox {...label} title='Add to listing' icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />
+                      <IconButton>
+                        <FavoriteBorder />
+                      </IconButton>
+                      <IconButton>
+                        <BookmarkBorderIcon />
+                      </IconButton>
                     </div>
                   </div>
                 </div>

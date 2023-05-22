@@ -27,7 +27,7 @@ function NavBar() {
             console.error(error);
         }
     }
-    
+
     const [countProducts, setcountProducts] = useState([]);
     useEffect(() => {
         getCountProducts()
@@ -47,6 +47,8 @@ function NavBar() {
 
                             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
                                 <Nav.Link as={Link} to='/smoak/public/catalogue'>Productos</Nav.Link>
+
+                                {/*                                 
                                 <Nav.Link as={Link} to='/smoak/public/Help'>Favoritos</Nav.Link>
 
 
@@ -55,7 +57,7 @@ function NavBar() {
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                     </svg></span></div>
                                     <input type="text" class="form-control" placeholder="Buscar..." aria-label="Search" aria-describedby="btnGroupAddon2" />
-                                </div>
+                                </div> */}
 
                             </Nav>
                             {/*if syntax */}
@@ -65,8 +67,6 @@ function NavBar() {
                                     <NavDropdown.Item as={Link} to="/smoak/public/login">Iniciar Sesión</NavDropdown.Item>
                                     <NavDropdown.Item as={Link} to="/smoak/public/register">Registrarse</NavDropdown.Item>
                                 </NavDropdown>
-
-
                             ) : (
                                 <Nav align="end">
                                     <Nav.Link as={Link} to='/smoak/public/cart'>

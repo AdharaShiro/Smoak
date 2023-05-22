@@ -145,7 +145,7 @@ function Store(props) {
                     >
                         <Form.Label>Almacenamiento:</Form.Label>
                         <Form.Control as="textarea"
-                            name="storgae"
+                            name="storage"
                             value={storage}
                             onChange={(e) => setStorage(e.target.value)}
                             required
@@ -204,9 +204,10 @@ function Store(props) {
                         controlId="exampleForm.ControlTextarea1"
                     >
                         <Form.Label>Precio:</Form.Label>
-                        <Form.Control as="textarea"
+                        <Form.Control
                             name="price"
                             value={price}
+                            type='number'
                             onChange={(e) => setPrice(e.target.value)}
                             required
                         />
@@ -216,9 +217,10 @@ function Store(props) {
                         controlId="exampleForm.ControlTextarea1"
                     >
                         <Form.Label>Cantidad en Stock:</Form.Label>
-                        <Form.Control as="textarea"
+                        <Form.Control
                             name="stockQuantity"
                             value={stockQuantity}
+                            type='number'
                             onChange={(e) => setStockQuantity(e.target.value)}
                             required
                         />
@@ -228,7 +230,7 @@ function Store(props) {
                         controlId="exampleForm.ControlTextarea1"
                     >
                         <Form.Label>Subcategoria:</Form.Label>
-                        <Form.Control as="textarea"
+                        <Form.Select
                             name="subcategory_id"
                             value={subcategory_id}
                             onChange={(e) => setSubcategory_id(e.target.value)}
@@ -239,7 +241,7 @@ function Store(props) {
                                 <option value={Subcategory.id} key={Subcategory.id}>{Subcategory.description}</option>
                             ))}
 
-                        </Form.Control>
+                        </Form.Select>
                     </Form.Group>
 
                     <Form.Group>
@@ -609,66 +611,75 @@ function AdminProducts(props) {
                             onHide={() => setModalStore(false)}
                         />
                     </tr>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Modelo</th>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Almacenamiento</th>
-                        <th scope="col">RAM</th>
-                        <th scope="col">Capacidad de bateria</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">CPU</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Subcategory</th>
-                        <th scope="col">Actions</th>
-                    </tr>
                 </thead>
-                <tbody>
-                    {Products.map((Product) => (
-                        <tr key={Product.id}>
-                            <th scope="row">{Product.id}</th>
-                            <td>{Product.photo}</td>
-                            <td>{Product.name}</td>
-                            <td>{Product.model}</td>
-                            <td>{Product.brand}</td>
-                            <td>{Product.color}</td>
-                            <td>{Product.storage}</td>
-                            <td>{Product.RAM}</td>
-                            <td>{Product.batteryCapacity}</td>
-                            <td>{Product.description}</td>
-                            <td>{Product.CPU}</td>
-                            <td>{Product.price}</td>
-                            <td>{Product.stockQuantity}</td>
-                            <td>{Product.subcategory_id}</td>
-                            <td className='text-end'>
-
-                                <IconButton variant="outline-warning" onClick={() => productEdit(Product)}>
-                                    <CreateOutlinedIcon sx={{ color: yellow[700] }} />
-                                </IconButton>{' '}
-                                <Update
-                                    show={modalEdit}
-                                    onHide={() => setModalEdit(false)}
-                                    Product={product}
-                                />
-                                <IconButton variant="outline-danger" onClick={() => productDelete(Product)}>
-                                    <DeleteOutlineIcon sx={{ color: red[700] }} />
-                                </IconButton>{' '}
-                                <Destroy
-                                    show={modalDelete}
-                                    onHide={() => setModalDelete(false)}
-                                    Product={product}
-                                />
-                            </td>
-                        </tr>
-                    ))}
-
-
-                </tbody>
             </table>
+
+            <div className="table-responsive overflow-auto" style={{ maxHeight: '500px' }}>
+
+                <table className="table table-hover">
+                    <thead>
+
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Almacenamiento</th>
+                            <th scope="col">RAM</th>
+                            <th scope="col">Capacidad de bateria</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">CPU</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Subcategory</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Products.map((Product) => (
+                            <tr key={Product.id}>
+                                <th scope="row" style={{ width: 50 }}>{Product.id}</th>
+                                <td>{Product.photo}</td>
+                                <td>{Product.name}</td>
+                                <td>{Product.model}</td>
+                                <td>{Product.brand}</td>
+                                <td>{Product.color}</td>
+                                <td>{Product.storage}</td>
+                                <td>{Product.RAM}</td>
+                                <td>{Product.batteryCapacity}</td>
+                                <td>{Product.description}</td>
+                                <td>{Product.CPU}</td>
+                                <td>{Product.price}</td>
+                                <td>{Product.stockQuantity}</td>
+                                <td>{Product.subcategory_id}</td>
+                                <td className='text-end'>
+
+                                    <IconButton variant="outline-warning" onClick={() => productEdit(Product)}>
+                                        <CreateOutlinedIcon sx={{ color: yellow[700] }} />
+                                    </IconButton>{' '}
+                                    <Update
+                                        show={modalEdit}
+                                        onHide={() => setModalEdit(false)}
+                                        Product={product}
+                                    />
+                                    <IconButton variant="outline-danger" onClick={() => productDelete(Product)}>
+                                        <DeleteOutlineIcon sx={{ color: red[700] }} />
+                                    </IconButton>{' '}
+                                    <Destroy
+                                        show={modalDelete}
+                                        onHide={() => setModalDelete(false)}
+                                        Product={product}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

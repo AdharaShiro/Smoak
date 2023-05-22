@@ -12,7 +12,6 @@ import AdmNav from "./Admin/AdmNav";
 import AdminCategories from "./Admin/AdminCategories";
 import AdminProducts from "./Admin/AdminProducts";
 import AdminSubcategories from "./Admin/AdminSubcategories";
-import AdminUser from "./Admin/AdminUser";
 
 export default function App() {
     return (
@@ -33,7 +32,6 @@ export default function App() {
                             <Route path="admcategories" element={<AdminCategories/>}/>
                             <Route path="admsubcategories" element={<AdminSubcategories/>}/>
                             <Route path="admproducts" element={<AdminProducts/>}/>
-                            {/* <Route path="admuser" element={}/> */}
                         </Route>
                     </Routes>
                 </AuthProvider>

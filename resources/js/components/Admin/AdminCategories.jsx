@@ -39,7 +39,7 @@ function Store(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            onHide={()=>window.location.reload()}
+            onHide={() => window.location.reload()}
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -82,14 +82,14 @@ function Update(props) {
     const update = async (e) => {
         const token = localStorage.getItem('token')
         e.preventDefault();
-        await axios.post(endpoint, { id: props.Category.id, descripcion: Description },
+        await axios.post(endpoint, { id: props.Category.id, description: Description },
             {
                 headers: {
-                    'Content-Type':'application/json',
+                    'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token
                 }
             }).then(response => {
-                alert("Categoria actualizada")            
+                alert("Categoria actualizada")
             }).catch(error => {
                 alert(error.response.data);
             })
@@ -101,7 +101,7 @@ function Update(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            onHide={()=>window.location.reload()}
+            onHide={() => window.location.reload()}
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -122,7 +122,7 @@ function Update(props) {
                         <Form.Label>Categoria:</Form.Label>
                         <Form.Control
                             name="Description" value={Description}
-                            onChange={(e) => setDescription(e.target.value)} required/>
+                            onChange={(e) => setDescription(e.target.value)} required />
                         <Form.Label>Dato a modificar: {props.Category.description}</Form.Label>
                     </Form.Group>
                     <Form.Group>
@@ -130,7 +130,7 @@ function Update(props) {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={()=>window.location.reload()}>Listo</Button>
+                <Button onClick={() => window.location.reload()}>Listo</Button>
             </Modal.Footer>
         </Modal>
     );
@@ -139,13 +139,13 @@ function Update(props) {
 function Destroy(props) {
     const navigate = useNavigate();
     const token = localStorage.getItem('token')
-    
+
     const endpoint = 'http://localhost/Smoak/public/api/category_delete'
     const deleteCategory = async (id) => {
         await axios.post(endpoint, { id: props.Category.id },
             {
                 headers: {
-                    'Content-Type':'application/json',
+                    'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token
                 }
             }).then(response => {
@@ -153,7 +153,7 @@ function Destroy(props) {
             }).catch(error => {
                 alert(error.response.data);
             })
-        navigate("/smoak/public/admin/admcategories")    
+        navigate("/smoak/public/admin/admcategories")
     }
     return (
         <Modal
@@ -161,7 +161,7 @@ function Destroy(props) {
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            onHide={()=>window.location.reload()}
+            onHide={() => window.location.reload()}
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -214,8 +214,8 @@ function AdminCategories(props) {
                         <td><h3>Categorias</h3></td>
                         <td></td>
                         <td className='text-end' onClick={() => setModalStore(true)}>
-                            <IconButton variant="outline-success"> 
-                            <AddIcon color="success"/>
+                            <IconButton variant="outline-success">
+                                <AddIcon color="success" />
                             </IconButton>
                         </td>
                         <Store
@@ -223,42 +223,49 @@ function AdminCategories(props) {
                             onHide={() => setModalStore(false)}
                         />
                     </tr>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Actions</th>
-                    </tr>
                 </thead>
-                <tbody>
-                    {Categories.map((Category) => (
-                        <tr key={Category.id}>
-                            <th scope="row">{Category.id}</th>
-                            <td>{Category.description}</td>
-                            <td className='text-end'>
-
-                                <IconButton variant="outline-warning" onClick={() => categoryEdit(Category)}>
-                                    <CreateOutlinedIcon sx={{color: yellow[700]}}/>
-                                </IconButton>{' '}
-                                <Update
-                                    show={modalEdit}
-                                    onHide={() => setModalEdit(false)}
-                                    Category={category}
-                                />
-                                <IconButton variant="outline-danger" onClick={() => categoryDelete(Category)}>
-                                    <DeleteOutlineIcon sx={{color: red[700]}}/>
-                                </IconButton>{' '}
-                                <Destroy
-                                    show={modalDelete}
-                                    onHide={() => setModalDelete(false)}
-                                    Category={category}
-                                />
-                            </td>
-                        </tr>
-                    ))}
-
-
-                </tbody>
             </table>
+            <div className="table-responsive overflow-auto" style={{ maxHeight: '500px' }}>
+
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Categories.map((Category) => (
+                            <tr key={Category.id}>
+                                <th scope="row">{Category.id}</th>
+                                <td>{Category.description}</td>
+                                <td className='text-end'>
+
+                                    <IconButton variant="outline-warning" onClick={() => categoryEdit(Category)}>
+                                        <CreateOutlinedIcon sx={{ color: yellow[700] }} />
+                                    </IconButton>{' '}
+                                    <Update
+                                        show={modalEdit}
+                                        onHide={() => setModalEdit(false)}
+                                        Category={category}
+                                    />
+                                    <IconButton variant="outline-danger" onClick={() => categoryDelete(Category)}>
+                                        <DeleteOutlineIcon sx={{ color: red[700] }} />
+                                    </IconButton>{' '}
+                                    <Destroy
+                                        show={modalDelete}
+                                        onHide={() => setModalDelete(false)}
+                                        Category={category}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

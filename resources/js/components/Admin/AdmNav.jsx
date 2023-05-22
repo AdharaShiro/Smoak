@@ -32,7 +32,7 @@ function AdmNav() {
                     <Col>
                         <Tab.Container id="left-tabs-example" defaultActiveKey="Tablero">
                             <Row>
-                                <Col style={{ paddingLeft: "2%", background: "#4065d6", paddingBottom: "1%", maxHeight: "900px", minHeight: "100%", maxWidth: "15%" }}>
+                                <Col style={{ paddingLeft: "2%", background: "#4065d6", paddingBottom: "1%", maxHeight: "735px", minHeight: "100%", minWidth: '10%', maxWidth: '25%' }}>
                                     <img src="https://i.imgur.com/arcVaGd.png"
                                         style={{ width: "100%", paddingTop: "2%", paddingLeft: "2%" }} />
                                     <Nav className="flex-column">
@@ -44,8 +44,6 @@ function AdmNav() {
                                         <Nav.Link as={Link} to='/Smoak/public/admin/admsubcategories' style={{ color: "white" }}>Subcategorias</Nav.Link>
                                         <hr />
                                         <Nav.Link as={Link} to='/Smoak/public/admin/admproducts' style={{ color: "white" }}>Productos</Nav.Link>
-                                        <hr />
-                                        <Nav.Link as={Link} to='/Smoak/public/admin/admuser' style={{ color: "white" }}>Usuarios</Nav.Link>
                                         <hr />
                                         <Nav.Link as={Link} to='/Smoak/public/login' onClick={() => logout()} style={{ color: "white" }}>Cerrar Sesión</Nav.Link>
                                         <hr />
@@ -68,12 +66,7 @@ function AdmNav() {
                                             </Navbar>
                                         </header>
                                     </Row>
-                                    <section style={{
-                                        marginTop: "2%", marginBottom: "2%", marginLeft: "2%",
-                                        paddingTop: "2%", paddingBottom: "8%", backgroundColor: "#ffffff", width: "95%", maxHeight: "80%"
-                                    }}>
-                                        <Outlet></Outlet>
-                                    </section>
+                                    <Outlet></Outlet>
                                 </Col>
                             </Row>
                         </Tab.Container>

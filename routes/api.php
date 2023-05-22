@@ -50,8 +50,7 @@ Route::post('/cart_store', [CartController::class, 'store']);
 Route::post('/cart_update', [CartController::class, 'update']);
 Route::post('/cart_delete', [CartController::class, 'destroy']);
 
-//Order Routes
-Route::get('/order/{id}', [OrdersController::class, 'index']);
+
 
 
 //Address Routes
@@ -61,9 +60,6 @@ Route::post('/address_update', [AddressController::class, 'update']);
 Route::post('/address_delete', [AddressController::class, 'destroy']);
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::middleware('auth:api')->group(
     function () {
@@ -83,10 +79,6 @@ Route::middleware('auth:api')->group(
         Route::post('/subcategory_update', [SubCategoryController::class, 'update']);
         Route::post('/subcategory_delete', [SubCategoryController::class, 'destroy]']);
 
-        //Order Routes
-
-        Route::post('/order_store', [OrdersController::class, 'store']);
-        Route::post('/order_update', [OrdersController::class, 'update']);
-        Route::post('/order_delete', [OrdersController::class, 'destroy']);
+    
     }
 );

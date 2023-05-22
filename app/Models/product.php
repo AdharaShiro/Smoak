@@ -17,6 +17,6 @@ class product extends Model
     }    
 
     public function cart(){
-        return $this -> hasMany(cart::class);
+        return $this -> belongsToMany(cart::class);
     }
 }
