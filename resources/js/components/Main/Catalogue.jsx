@@ -8,8 +8,34 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { IconButton } from '@mui/material';
 
 function Main() {
+  /*const getAllProducto = async (id = 1) => {
+    const response = await axios.get(`http://smoak/public/api/product_show/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+    setProducto(response.data)
+  }
+  const [Producto, setProducto] = useState([])
+  useEffect(() => {
+    getAllProducto()
+
+  }, [])*/
+
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   //hace uso de la ruta del controlador y guarda la informacion en esta variable 
+
+
+  const getLastProducts = async () => {
+    try {
+      const responce = await axios.get(`http://localhost/Smoak/public/api/products`);
+      setlastProducts(responce.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const addCart = async (product_id) => {
     try {
@@ -26,14 +52,6 @@ function Main() {
     }
   }
 
-  const getLastProducts = async () => {
-    try {
-      const responce = await axios.get(`http://localhost/Smoak/public/api/lastProducts`);
-      setlastProducts(responce.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   const [lastProducts, setlastProducts] = useState([]);
   useEffect(() => {
@@ -62,28 +80,22 @@ function Main() {
         <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img src="https://i.imgur.com/u4fHzEs.png" className="d-block w-100" alt="..." />
+              <img src="https://i.imgur.com/3DSQrYF.jpg" className="d-block w-100" alt="..." />
             </div>
             <div className="carousel-item">
-              <img src="https://i.imgur.com/Tt8aBqn.png" className="d-block w-100" alt="..." />
+              <img src="https://i.imgur.com/prIHrjH.png" className="d-block w-100" alt="..." />
             </div>
             <div className="carousel-item">
-              <img src="https://i.imgur.com/j3wjxv5.png" className="d-block w-100" alt="..." />
+              <img src="https://i.imgur.com/Buo1IIf.png" className="d-block w-100" alt="..." />
             </div>
             <div className="carousel-item">
-              <img src="https://i.imgur.com/x5R3DLQ.png" className="d-block w-100" alt="..." />
+              <img src="https://i.imgur.com/KWKVDrn.png" className="d-block w-100" alt="..." />
             </div>
             <div className="carousel-item">
-              <img src="https://i.imgur.com/EC05KlX.png" className="d-block w-100" alt="..." />
+              <img src="https://i.imgur.com/ddWqQdO.png" className="d-block w-100" alt="..." />
             </div>
             <div className="carousel-item">
-              <img src="https://i.imgur.com/Ld6Fk1u.png" className="d-block w-100" alt="..." />
-            </div>
-            <div className="carousel-item">
-              <img src="https://i.imgur.com/KzHWVq3.png" className="d-block w-100" alt="..." />
-            </div>
-            <div className="carousel-item">
-              <img src="https://i.imgur.com/geN1zWE.png" className="d-block w-100" alt="..." />
+              <img src="https://i.imgur.com/skwFOL1.png" className="d-block w-100" alt="..." />
             </div>
           </div>
           <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -97,15 +109,13 @@ function Main() {
         </div>
       </div>
 
-
-
       <div className="row py-5">
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {lastProducts.map((lp) => (
-            // Contenido de la plantilla 
+
             <div className="col" key={lp.id}>
               <div className="card h-100">
-                {/* Estructura del if */}
+
                 {lp.photo === "" ? (
                   <Image src="https://i.imgur.com/SZLTLGr.jpg" rounded></Image>
                 ) : (
@@ -142,8 +152,3 @@ function Main() {
 }
 
 export default Main;
-
-
-/*
-
-*/

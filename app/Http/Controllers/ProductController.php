@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cart;
 use App\Models\product;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,11 @@ class ProductController extends Controller
     {
         $products = product::all();
         return $products;
+    }
+
+    public function product_id($product_id){
+        $product = product::find($product_id);
+        return $product;
     }
 
     /**
@@ -42,7 +48,12 @@ class ProductController extends Controller
         $product -> model = $request -> model;
         $product -> brand = $request -> brand;
         $product -> color = $request -> color;
-        $product -> foto = $request -> foto;
+        $product -> photo = $request -> photo;
+        $product -> storage = $request -> storage;
+        $product -> RAM = $request -> RAM;
+        $product -> batteryCapacity = $request -> batteryCapacity;
+        $product -> description = $request -> description;
+        $product -> CPU = $request -> CPU;
         $product -> price = $request -> price;
         $product -> stockQuantity = $request -> stockQuantity;
         $product -> subCategory_id = $request -> subCategory;
@@ -83,6 +94,12 @@ class ProductController extends Controller
     {
         $products = product::destroy($request->id);
         echo 'The product has been deleted successfully.';
+    }
+
+    public function lastAdded (){
+        $lastProducts = product::orderBy('created_at', 'desc')->take(6)->get();
+        return $lastProducts;
+
     }
 }
 
